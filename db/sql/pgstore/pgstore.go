@@ -32,6 +32,23 @@ func NewUsers(dsn string) (*Users, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS public.users (
+		id uuid NOT NULL,
+		created_at timestamptz NOT NULL,
+		updated_at timestamptz NOT NULL,
+		deleted_at timestamptz NULL,
+		name varchar NOT NULL,
+		"data" varchar NULL,
+		perms int2 NULL,
+		CONSTRAINT users_pk PRIMARY KEY (id)
+	);`)
+
+	if err != nil {
+		db.Close()
+		return nil, err
+	}
+
 	err = db.Ping()
 	if err != nil {
 		db.Close()
