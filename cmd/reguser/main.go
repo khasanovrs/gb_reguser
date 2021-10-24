@@ -40,7 +40,7 @@ func main() {
 	case "mem":
 		ust = usermemstore.NewUsers()
 	case "pg":
-		dsn := os.Getenv("PG_DSN")
+		dsn := os.Getenv("DATABASE_URL")
 		pgst, err := pgstore.NewUsers(dsn)
 		if err != nil {
 			log.Fatal(err)
