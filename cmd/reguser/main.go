@@ -57,7 +57,7 @@ func main() {
 
 	rh := routeroapi.NewRouterOpenAPI(h)
 
-	srv := server.NewServer(":8000", rh)
+	srv := server.NewServer(":"+os.Getenv("PORT"), rh)
 
 	wg := &sync.WaitGroup{}
 	wg.Add(1)
